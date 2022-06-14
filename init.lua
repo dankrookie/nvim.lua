@@ -21,11 +21,11 @@ require('packer').startup(function()
     use 'junegunn/fzf'
     use 'junegunn/fzf.vim'
 end)
+vim.opt.wrap = false
 vim.opt.list = true
 vim.opt.listchars:append("tab:▸ ")
 vim.opt.expandtab = true
 vim.cmd 'colorscheme gruvbox'
-vim.opt.wrap = false
 vim.opt.cursorline = true
 vim.opt.cursorcolumn = true
 vim.opt.swapfile = false
