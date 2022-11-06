@@ -35,3 +35,5 @@ vim.g.mapleader = " "
 vim.api.nvim_set_keymap("n", "<leader>fr", ":History<CR>", { noremap = true })
 -- Open files in same directory as current file
 vim.api.nvim_set_keymap("n", "<leader>ff", ":e %:h/<C-d>", { noremap = true })
+-- Persist undo tree across neovim sessions
+vim.opt.undofile = true
