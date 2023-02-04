@@ -1,9 +1,3 @@
-" vim-plug setup {{{1
-if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall
-endif
 if filereadable(expand("~/.vim/autoload/plug.vim"))
   call plug#begin('~/.vim/plugged')
   " ggandor/leap.nvim
@@ -141,15 +135,10 @@ set showmode                                                                    
 set nofixendofline
 set timeoutlen=1200 " A little bit more time for macros
 set ttimeoutlen=50  " Make Esc work faster
-set nowrap                                                                      " don't wrap lines
 " Editing {{{
 " show invisible charecters
-set list
-" If 'set list' is enabled, the invisible characters are show using listchars
-set listchars=tab:▸\ ,trail:·,extends:#,nbsp:·
 set tabstop=4                                                                   " a tab is four spaces
 set softtabstop=4                                                               " when hitting <BS>, delete 4 spaces insted of 1
-set expandtab                                                                   " expand tabs by default (overloadable per file type later)
 set shiftwidth=4                                                                " number of spaces to use for autoindenting
 set autoindent                                                                  " always set autoindenting on
 set copyindent                                                                  " copy the previous indentation on autoindenting
@@ -179,8 +168,6 @@ set number
 " au FocusGained * :set relativenumber
 set termencoding=utf-8
 set encoding=utf-8
-set cursorline                                                                  " underline the current line, for quick orientation
-set cursorcolumn                                                                " have a vertical line marking the cursor column
 set scrolloff=0                                                                 " keep 4 lines off the edges of the screen when scrolling
 set hlsearch                                                                    " highlight search terms
 " }}}
@@ -206,7 +193,7 @@ set directory=~/.vim/.tmp,/tmp                                                  
 set viminfo='500,<80                                                            " read/write a .viminfo file, don't store more than 80 lines of registers
 set textwidth=132        " not 80 cause helps in vs mode
 " Ease of Use {{{
-set wildmenu                                                                    " tab completion for files/buffers like bash
+set wildmenu                                                                   " tab completion for files/buffers like bash
 set wildmode=longest,full                                                       " Complete till the longest match in command
 set wildignore=*.swp,*.bak,*.pyc,*.class
 set wildignore+=*/node_modules/*
@@ -273,18 +260,8 @@ let mapleader="\<Space>"
 let maplocalleader="\<Space>"
 " Clears the search register
 nnoremap <leader>n :nohlsearch<CR>
-" Find in files:
-nnoremap <leader>/ :Rg!
-nnoremap <leader>* :Rg!<C-R><C-W>
-" FZF is faster than CtrlP for finding files in Directories (pf - after projectile find, using same as spacemacs)
-nnoremap <leader>pf :FZF! +s --tac <CR>
 " Delete file
 nnoremap <leader>fD :call delete(expand('%')) <bar> bdelete! <CR>
-" alternate for => :CtrlPMRUFiles <CR>, Using keymaps from spacemacs
-" See: https://develop.spacemacs.org/doc/DOCUMENTATION.html
-nnoremap <leader>fr :History <CR>
-" open another file in same dir as current file, Using keymaps from spacemacs
-nnoremap <leader>ff :e %:h/<C-d>
 " Quit Files with leader + q
 nnoremap <leader>bd :bp\|bd #<cr>
 " Close splits but not last window
@@ -292,8 +269,6 @@ nnoremap <leader>wd :close!<cr>
 " Close vim itself
 nnoremap <leader>s :sp<CR>
 nnoremap <leader>v :vs<CR>
-" Fast saving
-nnoremap <leader>fs :w<cr>
 " }}} leader maping end
 " Clipboard madness {{{
 map p <Plug>(miniyank-autoput)
@@ -347,12 +322,6 @@ end
 " Using Meta-[hjkl] mappings in tmux to move panes
 let g:tmux_navigator_no_mappings = 0
 
-" Select text for which we need boxes drawn
-" https://github.com/ascii-boxes/boxes
-" db - draw box
-vnoremap <leader>db !boxes -d stone -p v1 -a hc -s 80
-" xb - delete box
-vnoremap <leader>xb !boxes -r<CR>
 nnoremap <leader>fn :NvimTreeFindFile<cr>
 " After yanking in visual mode move cursor to the end of  the selection
 vnoremap y ygv<Esc>
