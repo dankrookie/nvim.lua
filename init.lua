@@ -64,9 +64,3 @@ vim.keymap.set("n", "<leader>fr", builtin.oldfiles, {})
 -- Grep in files
 vim.keymap.set("n", "<leader>/", builtin.live_grep, {})
 vim.keymap.set("n", "<leader>fr", builtin.oldfiles, {})
-
--- openionated keymaps
--- jj
--- <lead>n
--- <lead>s
--- <lead>v

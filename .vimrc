@@ -1,11 +1,5 @@
 " vim: foldlevel=2:
-" Irrelevent sections are given a foldlevel of 3 so that they are folded by default
-" Courtsey :
-" Vincent Driessen <vincent@datafox.nl> http://nvie.com/posts/how-i-boosted-my-vim/
-" Tsung-Hsiang (Sean) Chang <vgod@vgod.tw>
-" junegunn: https://github.com/junegunn/dotfiles/blob/master/vimrc
-" https://github.com/yoshuawuyts/dotfiles
-" and Vim User Manual
+" OLD vimrc from which init lua is made
 " set as 'not compatible' with the old-fashion vi mode
 set nocompatible
 " vim-plug setup {{{1
@@ -68,17 +62,6 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
   let g:ClipperPort=5556
   Plug 'christoomey/vim-tmux-navigator'
   Plug 'chazy/cscope_maps'
-  Plug 'itchyny/lightline.vim'
-    let g:lightline = {
-        \ 'colorscheme': 'ayu_dark',
-        \ 'component_function': {
-        \   'filename': 'LightLineFilename'
-        \ },
-        \ }
-    function! LightLineFilename()
-      " Get shrinked current working directory and filename
-      return  substitute(getcwd(), '\(/.\)\([^/]*\)' , "\\1", "g") . ' | ' . expand('%')
-    endfunction
   Plug 'airblade/vim-rooter'
   let g:rooter_silent_chdir = 1 " airblade.vim-rooter.settings
   let g:rooter_change_directory_for_non_project_files = 'current' " airblade.vim-rooter.settings
@@ -93,7 +76,6 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
   Plug 'whiteinge/diffconflicts'
   " Non-essential
   Plug 'junegunn/rainbow_parentheses.vim'
-  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
   Plug 'neovim/nvim-lspconfig'
   " akinsho/toggleterm.nvim (c-t, esc:c-j)
   "     Default Alternative 
@@ -101,26 +83,6 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
   "         :vs term://zsh 
   "         ESC -> <c-\><c-n>
   Plug 'akinsho/toggleterm.nvim'
-  " Colorscheme
-  " Some colorscheme tested and conclusion
-  " solarized                - Good
-  " gruvbox                  - Good
-  " apprentice               - Good
-  " gotham                   - bad for diff highlight
-  " dracula                  - bad for types
-  " nord                     - bad for diff highlight
-  " onedark                  - GOOD
-  " base16-solarized-dark    - GOOD
-  " jellybeans               - bad for diff
-  " base16-summerfruit-dark  - GOOD
-  " catppuccin               - visual highlighting is not easily visible
-  Plug 'altercation/vim-colors-solarized'
-    set background=dark
-  " let g:solarized_termtrans=1
-  " let g:solarized_termcolors=256
-  Plug 'chriskempson/base16-vim'
-  Plug 'morhetz/gruvbox'
-  Plug 'romainl/Apprentice'
   call plug#end()
 endif
 if has("nvim")
@@ -130,14 +92,6 @@ require("nvim-tree").setup()
 
 require'lspconfig'.clangd.setup{
   cmd =  { "clangd", "--background-index" }
-}
-require'nvim-treesitter.configs'.setup {
-  ensure_installed = { "c", "cpp", "lua", "rust", "python" },
-  ignore_install = { "javascript", "verilog" },
-  highlight = {
-    enable = true,
-    disable = { "java", "verilog" },
-  },
 }
 require("toggleterm").setup{
   size = function(term)
@@ -167,10 +121,6 @@ vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
 EOF
 endif
 "}}}1 ========================================================Vundle setup done
-set guioptions-=m  "remove menu bar
-set guioptions-=T  "remove toolbar
-set guioptions-=r  "remove right-hand scroll bar
-set guioptions-=L
 " Basic Settings {{{
 " Enable filetype detection
 filetype on
