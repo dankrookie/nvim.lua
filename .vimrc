@@ -1,3 +1,13 @@
+" vim: foldlevel=2:
+" Irrelevent sections are given a foldlevel of 3 so that they are folded by default
+" Courtsey :
+" Vincent Driessen <vincent@datafox.nl> http://nvie.com/posts/how-i-boosted-my-vim/
+" Tsung-Hsiang (Sean) Chang <vgod@vgod.tw>
+" junegunn: https://github.com/junegunn/dotfiles/blob/master/vimrc
+" https://github.com/yoshuawuyts/dotfiles
+" and Vim User Manual
+" set as 'not compatible' with the old-fashion vi mode
+set nocompatible
 " vim-plug setup {{{1
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
@@ -54,10 +64,31 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
   Plug 'tpope/vim-fugitive'
   " tabular - Massively useful plugin for easily aligning
   Plug 'godlygeek/tabular'
+  Plug 'junegunn/fzf', { 'dir': '~/.fzf'}
   "Plug 'wincent/vim-clipper'
   let g:ClipperPort=5556
+  let g:fzf_preview_window = ['right:50%', 'ctrl-/']
+  Plug 'junegunn/fzf.vim'
+  let g:fzf_preview_window = []
+  " command! -bang -nargs=* Rg
+  "       \ call fzf#vim#grep(
+  "       \   'rg --sortr path --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
+  "       \   <bang>0 ? fzf#vim#with_preview('up:60%')
+  "       \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+  "       \   <bang>0)
   Plug 'christoomey/vim-tmux-navigator'
   Plug 'chazy/cscope_maps'
+  Plug 'itchyny/lightline.vim'
+    let g:lightline = {
+        \ 'colorscheme': 'ayu_dark',
+        \ 'component_function': {
+        \   'filename': 'LightLineFilename'
+        \ },
+        \ }
+    function! LightLineFilename()
+      " Get shrinked current working directory and filename
+      return  substitute(getcwd(), '\(/.\)\([^/]*\)' , "\\1", "g") . ' | ' . expand('%')
+    endfunction
   Plug 'airblade/vim-rooter'
   let g:rooter_silent_chdir = 1 " airblade.vim-rooter.settings
   let g:rooter_change_directory_for_non_project_files = 'current' " airblade.vim-rooter.settings
@@ -72,6 +103,7 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
   Plug 'whiteinge/diffconflicts'
   " Non-essential
   Plug 'junegunn/rainbow_parentheses.vim'
+  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
   Plug 'neovim/nvim-lspconfig'
   " akinsho/toggleterm.nvim (c-t, esc:c-j)
   "     Default Alternative 
@@ -79,6 +111,26 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
   "         :vs term://zsh 
   "         ESC -> <c-\><c-n>
   Plug 'akinsho/toggleterm.nvim'
+  " Colorscheme
+  " Some colorscheme tested and conclusion
+  " solarized                - Good
+  " gruvbox                  - Good
+  " apprentice               - Good
+  " gotham                   - bad for diff highlight
+  " dracula                  - bad for types
+  " nord                     - bad for diff highlight
+  " onedark                  - GOOD
+  " base16-solarized-dark    - GOOD
+  " jellybeans               - bad for diff
+  " base16-summerfruit-dark  - GOOD
+  " catppuccin               - visual highlighting is not easily visible
+  Plug 'altercation/vim-colors-solarized'
+    set background=dark
+  " let g:solarized_termtrans=1
+  " let g:solarized_termcolors=256
+  Plug 'chriskempson/base16-vim'
+  Plug 'morhetz/gruvbox'
+  Plug 'romainl/Apprentice'
   call plug#end()
 endif
 if has("nvim")
@@ -88,6 +140,14 @@ require("nvim-tree").setup()
 
 require'lspconfig'.clangd.setup{
   cmd =  { "clangd", "--background-index" }
+}
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = { "c", "cpp", "lua", "rust", "python" },
+  ignore_install = { "javascript", "verilog" },
+  highlight = {
+    enable = true,
+    disable = { "java", "verilog" },
+  },
 }
 require("toggleterm").setup{
   size = function(term)
