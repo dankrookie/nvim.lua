@@ -64,18 +64,8 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
   Plug 'tpope/vim-fugitive'
   " tabular - Massively useful plugin for easily aligning
   Plug 'godlygeek/tabular'
-  Plug 'junegunn/fzf', { 'dir': '~/.fzf'}
   "Plug 'wincent/vim-clipper'
   let g:ClipperPort=5556
-  let g:fzf_preview_window = ['right:50%', 'ctrl-/']
-  Plug 'junegunn/fzf.vim'
-  let g:fzf_preview_window = []
-  " command! -bang -nargs=* Rg
-  "       \ call fzf#vim#grep(
-  "       \   'rg --sortr path --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
-  "       \   <bang>0 ? fzf#vim#with_preview('up:60%')
-  "       \           : fzf#vim#with_preview('right:50%:hidden', '?'),
-  "       \   <bang>0)
   Plug 'christoomey/vim-tmux-navigator'
   Plug 'chazy/cscope_maps'
   Plug 'itchyny/lightline.vim'
@@ -336,8 +326,6 @@ nnoremap <leader>n :nohlsearch<CR>
 " Find in files:
 nnoremap <leader>/ :Rg!
 nnoremap <leader>* :Rg!<C-R><C-W>
-" FZF is faster than CtrlP for finding files in Directories (pf - after projectile find, using same as spacemacs)
-nnoremap <leader>pf :FZF! +s --tac <CR>
 " Delete file
 nnoremap <leader>fD :call delete(expand('%')) <bar> bdelete! <CR>
 " alternate for => :CtrlPMRUFiles <CR>, Using keymaps from spacemacs
