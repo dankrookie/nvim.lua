@@ -3,7 +3,10 @@ vim.cmd([[packadd packer.nvim]])
 require("packer").startup(function()
   use("wbthomason/packer.nvim")
   use("morhetz/gruvbox")
-  vim.cmd([[colorscheme gruvbox]])
+  vim.cmd([[
+    colorscheme gruvbox
+    autocmd VimEnter * hi Normal ctermbg=NONE guibg=NONE
+  ]])
   use("nvim-treesitter/nvim-treesitter")
   require("nvim-treesitter.configs").setup({
     ensure_installed = { "c", "lua", "rust" },

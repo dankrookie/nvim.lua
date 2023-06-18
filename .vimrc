@@ -22,12 +22,6 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
   let g:ale_lint_on_text_changed = 'normal'
   let g:ale_lint_on_insert_leave = 1
   let g:ale_lint_on_enter = 0
-  " mileszs/ack.vim - Search files
-  Plug 'mileszs/ack.vim'
-  if executable('rg')
-        let g:ackprg = 'rg --vimgrep'
-  endif
-  let g:ack_autoclose = 0
   Plug 'ledger/vim-ledger'
   " powerman/vim-plugin-viewdoc - For viewing help files
   Plug 'powerman/vim-plugin-viewdoc'
