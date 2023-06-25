@@ -67,3 +67,4 @@ vim.keymap.set("n", "<leader>pf", builtin.find_files, {})
 vim.keymap.set("n", "<leader>fr", builtin.oldfiles, {})
 -- Grep in files
 vim.keymap.set("n", "<leader>/", builtin.live_grep, {})
+vim.keymap.set("n", "<leader>fr", builtin.oldfiles, {})
